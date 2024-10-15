@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Task - Go To-Do App</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="/static/css/styles.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="mb-4 text-center">Edit Task</h1>
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <!-- Edit Task Form -->
+                <div class="card">
+                    <div class="card-body">
+                        <form action="/edit" method="POST">
+                            <input type="hidden" name="id" value="{{.ID}}">
+                            <div class="mb-3">
+                                <label for="task" class="form-label">Task</label>
+                                <input type="text" name="task" class="form-control" id="task" value="{{.Task}}" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="due_date" class="form-label">Due Date</label>
+                                <input type="date" name="due_date" class="form-control" id="due_date" value="{{if .DueDate}}{{.DueDate.Format "2006-01-02"}}{{end}}">
+                            </div>
+                            <div class="mb-3">
+                                <label for="category" class="form-label">Category</label>
+                                <input type="text" name="category" class="form-control" id="category" value="{{.Category}}">
+                            </div>
+                            <button type="submit" class="btn btn-success">Update Task</button>
+                            <a href="/" class="btn btn-secondary">Cancel</a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
