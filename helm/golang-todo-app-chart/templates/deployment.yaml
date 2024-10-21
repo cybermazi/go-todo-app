@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: golang-todo-app
-        image: takalezi6/golang-todo-app:v1
+        image: takalezi6/golang-todo-app:{{ .Values.image.tag }}
         ports:
         - containerPort: 8080
