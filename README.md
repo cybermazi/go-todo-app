@@ -1,6 +1,6 @@
-# DevOps Golang To-Do Web Application: Docker, Jenkins, Amazon K8s, Helm, SonarQube
+# DevOps Golang To-Do Web Application: Docker, Jenkins, Amazon EKS, Helm, SonarQube
 
-This is a web application written in Golang. The goal is to implement DevOps practices in the application.
+This is a web application, written in Golang, aims to implement practices
 - Containerization (Distroless build)
 - Jenkins for Continous Integration
 - SonarQube for code security(DAST)

@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: golang-todo-app
+  labels:
+    app: golang-todo-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: golang-todo-app
+  template:
+    metadata:
+      labels:
+        app: golang-todo-app
+    spec:
+      containers:
+      - name: golang-todo-app
+        image: takalezi6/golang-todo-app:v1
+        ports:
+        - containerPort: 8080
