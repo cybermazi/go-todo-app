@@ -1,0 +1,23 @@
+# Default values for go-web-app-chart.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+image:
+  repository: takalezi6/golang-todo-app
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: "v1"
+
+ingress:
+  enabled: "true"
+  className: "nginx"
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+
+  hosts:
+    - host: golang-todo-app.local
+      paths:
+        - path: /
+          pathType: Prefix
