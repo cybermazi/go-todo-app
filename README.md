@@ -5,5 +5,5 @@ This is a web application, written in Golang, aims to implement practices
 - GitHub Actions for Continous Integration
 - SonarQube for code security(DAST)
 - Helm chart to simplify Kubernetes deployment
-- ArgoCD for Continous Deployment hosted on Amazon EKS
+- ArgoCD for Continous Deployment hosted on Amazon EK
 
