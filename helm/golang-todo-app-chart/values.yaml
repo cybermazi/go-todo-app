@@ -8,7 +8,7 @@ image:
   repository: takalezi6/golang-todo-app
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "11664302391"
+  tag: "11895916863"
 
 ingress:
   enabled: "true"
