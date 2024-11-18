@@ -1,9 +1,9 @@
-# DevOps Golang To-Do Web Application: Docker, GitHub Actions, Amazon EKS, Helm, SonarQube
+# DevOps Golang To-Do Web Application: GitHub Actions, SonarCloud, Docker, Helm, Amazon EKS
 
-This is a web application, written in Golang, aims to implement practices
-- Containerization (Distroless build)
-- GitHub Actions for Continous Integration
-- SonarQube for code security(DAST)
-- Helm chart to simplify Kubernetes deployment
-- ArgoCD for Continous Deployment hosted on Amazon EK
+A Golang-based To-Do web application
+- Containerization: Distroless Docker build
+- CI/CD: GitHub Actions for Continous Integration
+- SonarCloud for code security(DAST)
+- Kubernetes: Simplified deployment with Helm
+- ArgoCD for Continous Deployment hosted on Amazon EKS
 

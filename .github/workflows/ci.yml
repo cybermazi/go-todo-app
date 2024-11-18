@@ -12,35 +12,55 @@ on:
       - 'README.md'
 
 jobs:
+  golangci:
+    name: Run GolangCI-Lint
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version: stable
+      - name: Run Golangci-lint
+        uses: golangci/golangci-lint-action@v6
+        with:
+          version: v1.60
+
+  sonarcloud:
+    name: Perform SonarCloud Scan
+    runs-on: ubuntu-latest
+
+    needs: golangci
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: SonarCloud Scan
+        uses: sonarsource/sonarcloud-github-action@v3.1.0
+        env:
+          SONAR_TOKEN: ${{secrets.SONAR_TOKEN}}
 
   build:
+    name: Build Application
     runs-on: ubuntu-latest
+
+    needs: sonarcloud
 
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
 
     - name: Set up Go 1.23
-      uses: actions/setup-go@v2
+      uses: actions/setup-go@v5
       with:
-        go-version: 1.23
+        go-version: stable
 
     - name: Build
       run: go build -o golang-todo-app
-
-  #code-quality:
-    #runs-on: ubuntu-latest
-
-  #  steps:
-  #  - name: Check out repo
-  #    uses: actions/checkout@v4
-
-  #  - name: Run GolangCI-Lint Action 
-  #    uses: golangci/golangci-lint-action@v6
-  #    with:
-  #      version: v1.56.2
   
   push:
+    name: Build and Push Docker Image
     runs-on: ubuntu-latest
 
     needs: build
@@ -62,6 +82,7 @@ jobs:
       run: docker push takalezi6/golang-todo-app:${{ github.run_id }}
     
   update-newtag-in-helm-chart:
+    name: Update Helm Chart with New Tag
     runs-on: ubuntu-latest
 
     needs: push
