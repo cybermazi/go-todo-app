@@ -39,10 +39,10 @@ jobs:
       - name: SonarCloud Scan
         uses: sonarsource/sonarcloud-github-action@v3.1.0
         with:
-          SonarToken: ${{secrets.SONAR_TOKEN}}
-          projectKey: cybermazi_golang-todo-app
-          organization: cybermazi
-
+          args: "-Dsonar.projectKey=cybermazi_golang-todo-app -Dsonar.organization=cybermazi"
+        env:
+          SONAR_TOKEN: ${{secrets.SONAR_TOKEN}}
+          
 
   build:
     name: Build Application
