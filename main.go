@@ -249,6 +249,7 @@ func editTodoHandler(w http.ResponseWriter, r *http.Request) {
 			todo.DueDate = dueDate.Time
 		}
 
+		// Render the edit template
 		if err := tmplEdit.Execute(w, todo); err != nil {
 			http.Error(w, "Error rendering template: "+err.Error(), http.StatusInternalServerError)
 			return
@@ -290,4 +291,9 @@ func editTodoHandler(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 
-		http
+		http.Redirect(w, r, "/", http.StatusSeeOther)
+		return
+	}
+
+	http.Error(w, "Invalid request method", http.StatusMethodNotAllowed)
+}
