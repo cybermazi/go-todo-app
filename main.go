@@ -6,7 +6,6 @@ import (
 	"log"
 	"net/http"
 	"strconv"
-	"sync"
 	"time"
 
 	_ "github.com/mattn/go-sqlite3"
@@ -14,7 +13,7 @@ import (
 
 // Todo represents a single to-do item.
 type Todo struct {
-	ID        int       `json:"id"` 
+	ID        int       `json:"id"`
 	Task      string    `json:"task"`
 	Completed bool      `json:"completed"`
 	DueDate   time.Time `json:"due_date"`
@@ -25,7 +24,6 @@ var (
 	db       *sql.DB
 	tmpl     = template.Must(template.ParseFiles("templates/index.html"))
 	tmplEdit = template.Must(template.ParseFiles("templates/edit.html"))
-	mu       sync.Mutex
 )
 
 func initDB() {
@@ -251,7 +249,10 @@ func editTodoHandler(w http.ResponseWriter, r *http.Request) {
 			todo.DueDate = dueDate.Time
 		}
 
-		tmplEdit.Execute(w, todo)
+		if err := tmplEdit.Execute(w, todo); err != nil {
+			http.Error(w, "Error rendering template: "+err.Error(), http.StatusInternalServerError)
+			return
+		}
 		return
 	}
 
@@ -289,9 +290,4 @@ func editTodoHandler(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 
-		http.Redirect(w, r, "/", http.StatusSeeOther)
-		return
-	}
-
-	http.Error(w, "Invalid request method", http.StatusMethodNotAllowed)
-}
+		http
